@@ -24,11 +24,11 @@ Nodes can be evaluated (a.k.a. executed), a node being evaluated means that it's
 
 (The root-node is special since it gets evaluated on a preset intervall, in video-games it's commonly once per frame, this will be important when we look at our first example later on.)
 
-```cpp  
+```csharp
 public enum NodeState { RUNNING, SUCCESS, FAILURE }
 ```
 
-```cpp
+```csharp
 public class Node  
 {  
     protected List<Node> children;    
@@ -56,7 +56,7 @@ To move on to the next section you only need a grasp of the *Sequence* and *Fall
 #### Sequence
 The sequence composite iterates through all it's children until one returns *Failure* or all return success. If one of it's children returns *Failure*, the sequence does the same, and only if all the children return *Success* the sequence does so too.
 
-```cs
+```csharp
 public class Sequence : Node {  
 	public Sequence(params Node[] children) : base(children) { }  
 	
@@ -87,7 +87,7 @@ public class Sequence : Node {
 #### Fallback
 Sometimes referred to as *Selectors*. The Fallback composite iterates through all it's children until one returns *Success* or all return *Failure*. If one of it's children returns *Success*, the Fallback does the same, but if all the children return *Failure* the Fallback does so too.
 
-```cs
+```csharp
 public class Fallback : Node {  
     public Fallback(params Node[] children) : base(children) { }  
     
@@ -119,7 +119,7 @@ public class Fallback : Node {
 #### Random
 This composite is not necessarily a feature of every behaviour trees system. My implementation of the random composite executes only one of it's children, a randomized one or the node from the last iteration if it returned *Running*. The random node's return-value mirrors the one of the selected child. The children also have weights attached to them which are used to make the children nodes more or less probable to get executed.
 
-```cs
+```csharp
 public class Random : Node {  
     private readonly Dictionary<Node, int> weightDict;  
 	
